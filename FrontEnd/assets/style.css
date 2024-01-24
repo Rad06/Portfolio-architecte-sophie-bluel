@@ -294,11 +294,21 @@ footer nav ul {
 
 .fermetureModale {
 
-	width: 630px;
-	height: 688px;
-	top: 660px;
-	left: 405px;
+	width: 75%;
+	height: 409px;
+	top: 20%;
+	left: 12.5%;
 	border-radius: 10px;
+	overflow-y: scroll;
+	z-index: 2
+}
+
+.galery-item {
+	width: 70px;
+}
+
+.galery-item img {
+	width: 100%;
 }
 
 .fermetureModale p,
@@ -336,35 +346,49 @@ img {
 	padding-left: 25px;
 	padding-top: 25px;
 	padding-bottom: 25px;
-	
-	
+
+
 }
+
 .image {
 	position: relative;
 }
 
-.fa-solid  .fa-trash-can {
+.fa-solid .fa-trash-can {
 	position: absolute;
 }
 
 
 
-.trait
-{
+.trait {
 	margin: auto;
-width:400px;
-border:1px solid black;
+	width: 400px;
+	border: 1px solid black;
 
-border: 1px solid #B3B3B3; 
-
-
-
-
-
-
-
-
+	border: 1px solid #B3B3B3;
 }
+
+
+.modaleGrey {
+	display: flex;
+	background: #0000004D;
+}
+
+.modaleGrey.opened {
+	position: fixed;
+	width: 100vw;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	height: 100vh;
+	z-index: 1;
+}
+
+
+
+
+
 /* .modaleGrey {
 	display: flex;
 	position: fixed;
