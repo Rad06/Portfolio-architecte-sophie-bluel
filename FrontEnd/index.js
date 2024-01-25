@@ -65,7 +65,7 @@ if (isAuthenticated()) {
   const img = document.createElement('img');
   img.src = "assets/images/Vector (8).png"
   img.className = "logo-Modifier";
-  img.setAttribute('alt', 'bouton modifier') 
+  img.setAttribute('alt', 'bouton modifier')
   nouveauButton.appendChild(img)
   h2.appendChild(nouveauButton)
 
@@ -86,11 +86,11 @@ if (isAuthenticated()) {
         const span = document.createElement("span")
         const trash = document.createElement("i")
         trash.classList.add("fa-solid", "fa-trash-can")
-        // Relier la poubelle à l'ID de l'image
-        trash.id = projet.id
         span.appendChild(trash)
         fermetureModale.appendChild(span)
-
+        // Relier la poubelle à l'ID de l'image
+        trash.id = projet.id
+        console.log(projet.id);
         // image.style = "display flex"
         container.className = 'galery-item'
         container.appendChild(image);
@@ -107,8 +107,23 @@ if (isAuthenticated()) {
 
 const closeModalGaleryButton = document.getElementById('close_back_galery');
 closeModalGaleryButton.addEventListener("click", () => {
+  close_back_galery.style.display = "none"
   closeModal()
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Fermeture de la page transparente
@@ -120,9 +135,33 @@ overlay.addEventListener("click", () => {
 })
 
 // Supprimer les photos au click 
+function deletPhotos() {
+  const trashAll = document.querySelectorAll(".fa-trash-can")
+  console.log(trashAll);
+  trashAll.forEach(trash => {
+    trash.addEventListener("click",() => {
+    const  id =trash.id
+    const init ={
+      method :"DELETE",
+      Headers:{"content type":"application/json"},
+    }
+    fetch("http://localhost:5678/api/works" + id,init)
+    .then((reponse) =>{
+      if (!reponse.ok) {
+        console.log("le delet ne marche pas" );
+      }
+      return reponse.json()
+    })
+    .then((data)=>{
+      console.log("delet reussi voila la data:",data);
+      fermetureModale()
+      back_galery()
+    })
+    })
+  });
+}
 
-
-
+deletPhotos()
 
 
 
@@ -181,7 +220,7 @@ overlay.addEventListener("click", () => {
 //   modaleGrey.style.display = "none"
 // })
 
-// // Supprimer les photos au click 
+// // Supprimer les photos au click
 // function deletPhotos() {
 //   const trashAll = document.querySelectorAll(".fa-trash-can")
 //   console.log(trashAll);
