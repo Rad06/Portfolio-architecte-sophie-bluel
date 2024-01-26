@@ -394,15 +394,6 @@ cursor: pointer;
 	z-index: 2
 }
 
-.galery-item {
-	width: 70px;
-}
-
-
-.galery-item img {
-	width: 100%;
-}
-
 .fermetureModale p,
 input {
 	display: flex;
@@ -426,7 +417,7 @@ input {
 	border: transparent;
 	float: right;
 }
-#back_galery,
+
 img {
 
 	display: grid;
@@ -519,11 +510,28 @@ h2 button {
 figcaption {
 	padding-left: 25px;
 }
-
+#back_galery {
+	display: flex;
+	flex-wrap: wrap;
+}
 .galery-item{
 	position: relative;
+	width: 100px;
+	margin-left: 10px;
+	margin-bottom: 10px;
 } 
 
-span{
+.galery-item img {
+	width: 100%;
+	display: block;
+	padding: 0;
+}
+
+
+.galery-item a {
 	position: absolute;
+	right: 0;
+	top: 0;
+	text-decoration: none;
+	color: black;
 } 
