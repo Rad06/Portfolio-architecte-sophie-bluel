@@ -1,17 +1,14 @@
-const overlay = document.querySelector('.modaleGrey');
-const fermetureModale = document.querySelector(".fermetureModale")
 
-// const gallery = document.querySelector(".gallery")  //
-// LANCEMENT DE PAGE 
-loadCategories()
-  .then((categories) => {
-    createCategoriesContainer()
-    // Une fois les travaux recuperes on appel nos fonctions
-    displayCategories(categories) //Transmet categories au displayCategories 
+const overlay = document.querySelector(".modaleGrey");
+const fermetureModale = document.querySelector(".fermetureModale");
 
-  })
-displayAllWorks()
-
+// LANCEMENT DE PAGE
+loadCategories().then((categories) => {
+  createCategoriesContainer();
+  // Une fois les travaux recuperes on appel nos fonctions
+  displayCategories(categories); //Transmet categories au displayCategories
+});
+displayAllWorks();
 
 
 
@@ -22,8 +19,8 @@ function getValue() {
   alert("input");
   // déclencher un événement sur le clic de bouton
   email.addEventListener("click", () => {
-    console.log("Vous avez cliqué sur le bouton")
-
+    // console.log("Vous avez cliqué sur le bouton")
+    console.log("Vous avez cliqué sur le bouton");
   });
 }
 
@@ -35,193 +32,116 @@ function selectionner() {
   alert(input);
   // déclencher un événement sur le clic de bouton
   password.addEventListener("click", () => {
-    console.log("Vous avez cliqué sur le bouton")
+    console.log("Vous avez cliqué sur le bouton");
   });
-
 
 }
 
-// Ajouter un message error sur le champ email si ce dernier n'est pas bon 
+// Ajouter un message error sur le champ email si ce dernier n'est pas bon
 function verifierChamp(email) {
-  // if (email.value === "") {
-  //   email.classList.add("error")
-  // } else {
-  //   email.classList.remove("error")
-  // }
+  
 }
 // Ajouter un message error sur le champ password si ce dernier n'est pas bon 
 function verifierChamp(password) {
-  // if (password.value === "") {
-  //   password.classList.add("error")
-  // } else {
-  //   password.classList.remove("error")
-  // }
 }
 
 if (isAuthenticated()) {
-  let nouveauButton = document.createElement("button")
-  const h2 = document.querySelector("#portfolio h2")
-  nouveauButton.textContent = "modifier"
-  const img = document.createElement('img');
-  img.src = "assets/images/Vector (8).png"
+  let nouveauButton = document.createElement("button");
+  const h2 = document.querySelector("#portfolio h2");
+  nouveauButton.textContent = "modifier";
+  const img = document.createElement("img");
+  img.src = "assets/images/Vector (8).png";
+
+
+
+
+
+
+
   img.className = "logo-Modifier";
-  img.setAttribute('alt', 'bouton modifier')
-  nouveauButton.appendChild(img)
-  h2.appendChild(nouveauButton)
-
+  img.setAttribute("alt", "bouton modifier");
+  nouveauButton.appendChild(img);
+  h2.appendChild(nouveauButton);
   nouveauButton.addEventListener("click", () => {
-
     overlay.classList.add('opened');
-
-    const galerie = document.getElementById('back_galery');
-    galerie.innerHTML = '';
-    fermetureModale.open = true
+    const galerie = document.getElementById("back_galery");
+    galerie.innerHTML = "";
+    fermetureModale.open = true;
     loadWorks().then((works) => {
-
       works.forEach(projet => {
-        const container = document.createElement('div');
-        const image = document.createElement('img');
+        const container = document.createElement("div");
+        const image = document.createElement("img");
         image.src = projet.imageUrl;
-        // AJOUT DE LA POUBELLE
-        const span = document.createElement("span")
-        const trash = document.createElement("i")
-        trash.classList.add("fa-solid", "fa-trash-can")
-        span.appendChild(trash)
-        fermetureModale.appendChild(span)
+        const a = document.createElement("a");
+        const trash = document.createElement("i");
+        trash.classList.add("fa-solid", "fa-trash-can");
+        a.appendChild(trash);
+        fermetureModale.appendChild(a);
+
+
+
+
+
+
         // Relier la poubelle à l'ID de l'image
         trash.id = projet.id
         console.log(projet.id);
-        // image.style = "display flex"
-        container.className = 'galery-item'
+        container.className = "galery-item";
         container.appendChild(image);
-        container.appendChild(span)
-        galerie.appendChild(container)
+        container.appendChild(a);
+        galerie.appendChild(container);
       });
     })
 
   })
-  deletPhotos()
+  deletPhotos();
 }
 
 // Fermer la fenetre modale au click sur le bouton
-
-const closeModalGaleryButton = document.getElementById('close_back_galery');
+const closeModalGaleryButton = document.getElementById("close_back_galery");
 closeModalGaleryButton.addEventListener("click", () => {
-  close_back_galery.style.display = "none"
-  closeModal()
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  close_back_galery.style.display = "none";
+  closeModal();
+});
 
 // Fermeture de la page transparente
-
-
 overlay.addEventListener("click", () => {
-  console.log('test')
-  closeModal()
+  console.log("test");
+  closeModal();
 })
 
-// Supprimer les photos au click 
+// Supprimer les photos au click
 function deletPhotos() {
-  const trashAll = document.querySelectorAll(".fa-trash-can")
+  // const trashAll = document.querySelectorAll(".fa-trash-can")
+  const trashAll = document.querySelectorAll(".fa-trash-can");
   console.log(trashAll);
-  trashAll.forEach(trash => {
-    trash.addEventListener("click",() => {
-    const  id =trash.id
-    const init ={
-      method :"DELETE",
-      Headers:{"content type":"application/json"},
-    }
-    fetch("http://localhost:5678/api/works" + id,init)
-    .then((reponse) =>{
-      if (!reponse.ok) {
-        console.log("le delet ne marche pas" );
-      }
-      return reponse.json()
-    })
-    .then((data)=>{
-      console.log("delet reussi voila la data:",data);
-      fermetureModale()
-      back_galery()
-    })
-    })
+trashAll.forEach((trash) => {
+  trash.addEventListener("click", () => {
+    const id = trash.id;
+    const init = {
+      method: "DELETE",
+      Headers: { "content type": "application/json" },
+    };
+    fetch("http://localhost:5678/api/works" + id, init)
+      .then((reponse) => {
+        if (!reponse.ok) {
+          console.log("le delet ne marche pas");
+        }
+        return reponse.json();
+      })
+      .then((data) => {
+        console.log("delet reussi voila la data:", data);
+        fermetureModale();
+        back_galery();
+      });
   });
+});
 }
 
-deletPhotos()
+// deletPhotos()
+deletPhotos();
 
 
 
 
 
-
-
-
-//  Ajouter Bouton Modifier
-// const isLoggedIn = localStorage.getItem("token") !== null
-// console.log(isLoggedIn);
-
-// if (isLoggedIn) {
-//   let nouveauButton = document.createElement("button")
-//   const h2 = document.querySelector("#portfolio h2")
-//   nouveauButton.textContent = "modifier"
-//   h2.appendChild(nouveauButton)
-//   nouveauButton.addEventListener("click", () => {
-//     // const fermetureModale = document.querySelector(".fermetureModale")
-//     const galerie = document.getElementById('back_galery');
-//     fermetureModale.open = true
-//     loadWorks().then((works) => {
-//       console.log('2')
-//       works.forEach(projet => {
-//         const image = document.createElement('img');
-//         image.src = projet.imageUrl;
-// // AJOUT DE LA POUBELLE
-//         const span = document.createElement("span")
-//         const trash = document.createElement("i")
-//         trash.classList.add("fa-solid", "fa-trash-can")
-//         // Relier la poubelle à l'ID de l'image
-//         // trash.id = image.id
-//         span.appendChild(trash)
-//         fermetureModale.appendChild(span)
-//         image.style = "width: 76.61px"
-//         // image.style = "display flex"
-//         galerie.appendChild(image)
-//       });
-//     })
-//     console.log('1')
-//   })
-//   deletPhotos()
-// }
-
-// // Fermer la fenetre modale au click
-
-// const fermetureModale = document.querySelector(".fermetureModale ")
-// fermetureModale.addEventListener("click", () => {
-//   fermetureModale.style.display = "none"
-// })
-
-// // Fermeture de la page transparente
-
-// const modaleGrey = document.querySelector(".modaleGrey ")
-// modaleGrey.addEventListener("click", () => {
-//   modaleGrey.style.display = "none"
-// })
-
-// // Supprimer les photos au click
-// function deletPhotos() {
-//   const trashAll = document.querySelectorAll(".fa-trash-can")
-//   console.log(trashAll);
-// }
