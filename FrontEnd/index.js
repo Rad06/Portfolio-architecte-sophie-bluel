@@ -1,6 +1,11 @@
-
 const overlay = document.querySelector(".modaleGrey");
 const fermetureModale = document.querySelector(".fermetureModale");
+const galerie = document.getElementById("back_galery");
+const galerie_add = document.getElementById("back_add");
+const formAddLink = document.getElementById("add-photo-link");
+const modaleTitle = document.querySelector(".fermetureModale .modale-title");
+const modaleBack = document.getElementById("modale_back");
+const formAddPhoto = document.getElementById('form-add-photo');
 
 // LANCEMENT DE PAGE
 loadCategories().then((categories) => {
@@ -9,8 +14,6 @@ loadCategories().then((categories) => {
   displayCategories(categories); //Transmet categories au displayCategories
 });
 displayAllWorks();
-
-
 
 function getValue() {
   // //  // Sélectionner l'élément input et récupérer sa valeur
@@ -24,7 +27,6 @@ function getValue() {
   });
 }
 
-
 function selectionner() {
   // //  // Sélectionner l'élément input et récupérer sa valeur
   // let password = document.getElementById("password").value;
@@ -34,16 +36,12 @@ function selectionner() {
   password.addEventListener("click", () => {
     console.log("Vous avez cliqué sur le bouton");
   });
-
 }
 
 // Ajouter un message error sur le champ email si ce dernier n'est pas bon
-function verifierChamp(email) {
-  
-}
-// Ajouter un message error sur le champ password si ce dernier n'est pas bon 
-function verifierChamp(password) {
-}
+function verifierChamp(email) {}
+// Ajouter un message error sur le champ password si ce dernier n'est pas bon
+function verifierChamp(password) {}
 
 if (isAuthenticated()) {
   let nouveauButton = document.createElement("button");
@@ -56,12 +54,12 @@ if (isAuthenticated()) {
   nouveauButton.appendChild(img);
   h2.appendChild(nouveauButton);
   nouveauButton.addEventListener("click", () => {
-    overlay.classList.add('opened');
-    const galerie = document.getElementById("back_galery");
+    overlay.classList.add("opened");
+
     galerie.innerHTML = "";
     fermetureModale.open = true;
     loadWorks().then((works) => {
-      works.forEach(projet => {
+      works.forEach((projet) => {
         const container = document.createElement("div");
         const image = document.createElement("img");
         image.src = projet.imageUrl;
@@ -70,88 +68,82 @@ if (isAuthenticated()) {
         trash.classList.add("fa-solid", "fa-trash-can");
         a.appendChild(trash);
         fermetureModale.appendChild(a);
-
-
-
-
-
-
         // Relier la poubelle à l'ID de l'image
-        trash.id = projet.id
+        trash.id = projet.id;
         console.log(projet.id);
         container.className = "galery-item";
         container.appendChild(image);
         container.appendChild(a);
         galerie.appendChild(container);
       });
-    })
-
-  })
-  deletPhotos();
+      deletPhotos();
+    });
+  });
 }
 
 // Fermer la fenetre modale au click sur le bouton
 const closeModalGaleryButton = document.getElementById("close_back_galery");
 closeModalGaleryButton.addEventListener("click", () => {
-  close_back_galery.style.display = "none";
+  // close_back_galery.style.display = "none";
   closeModal();
 });
 
 // Fermeture de la page transparente
 overlay.addEventListener("click", () => {
-  console.log("test");
   closeModal();
-})
+});
 
 // Supprimer les photos au click
 function deletPhotos() {
   // const trashAll = document.querySelectorAll(".fa-trash-can")
   const trashAll = document.querySelectorAll(".fa-trash-can");
-  console.log(trashAll);
-trashAll.forEach((trash) => {
-  trash.addEventListener("click", () => {
-    const id = trash.id;
-    const init = {
-      method: "DELETE",
-      Headers: { "content type": "application/json" },
-    };
-    fetch("http://localhost:5678/api/works" + id, init)
-      .then((reponse) => {
-        if (!reponse.ok) {
-          console.log("le delet ne marche pas");
-        }
-        return reponse.json();
-      })
-      .then((data) => {
-        console.log("delet reussi voila la data:", data);
-        fermetureModale();
-        back_galery();
-      });
+
+  trashAll.forEach((trash) => {
+    trash.addEventListener("click", (event) => {
+      event.preventDefault();
+      const id = trash.id;
+      const init = {
+        method: "DELETE",
+        headers: {
+          "content-Type": "application/json",
+          Authorization: "Bearer " + getToken(),
+        },
+      };
+      fetch("http://localhost:5678/api/works/" + id, init)
+        .then((reponse) => {
+          if (!reponse.ok) {
+            console.log("le delet ne marche pas");
+          }
+          return reponse.json();
+        })
+        .then((data) => {
+          console.log("delet reussi voila la data:", data);
+          // rafraichir la gallerie
+
+          // rafraichir la page d'accueil
+          displayAllWorks()
+        });
+    });
   });
-});
 }
 
 // deletPhotos()
 deletPhotos();
 
-
 // AJOUTER DES PHOTOS AU MODALE EN CLIQUANT SUR LE BOUTON AJOUTER
 
-const ajoutPhotoModale =document.querySelector(".fermetureModale input");
-ajoutPhotoModale.addEventListener("click",() =>{
+formAddLink.addEventListener("submit", (event) => {
+  event.preventDefault();
+  navigate(true);
+});
 
-// let nouvelleImage =document.createElement("")
- 
-  // var imageInput = document.getElementById('imageInput');
-  
-  
-  // var selectedFile = imageInput.files[0];
-
-}   )
-  
-    
-  
-  
-    
+modaleBack.addEventListener("click", (event) => {
+  event.preventDefault();
+  navigate(false);
+});
 
 
+formAddPhoto.addEventListener('submit', (event) => {
+  event.preventDefault()
+  console.log('recupérer les données du formulaire et envoie à l api pour créer le nouveau projet')
+})

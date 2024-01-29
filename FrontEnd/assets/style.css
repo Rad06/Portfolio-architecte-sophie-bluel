@@ -782,7 +782,12 @@ span{
 		background-color: white;
 	} 
 
-
+	#back_add {
+		display: none;
+	}
+	#modale_back {
+		display: none;
+	}
 
 
 
