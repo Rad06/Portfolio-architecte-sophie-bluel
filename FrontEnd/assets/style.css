@@ -614,13 +614,18 @@ span{
 	
 	.fermetureModale {
 	
-		width: 75%;
-		height: 409px;
+		width: 50%;
+		height: 700px;
 		top: 20%;
 		left: 12.5%;
 		border-radius: 10px;
 		overflow-y: scroll;
 		z-index: 2
+		
+	}
+	.fermetureModale p {
+		padding-top: 25px;
+		padding-bottom: 25px;
 	}
 	
 	.fermetureModale p,
@@ -632,7 +637,7 @@ span{
 	
 	.fermetureModale p {
 		padding-top: 40px;
-		font-family: Work Sans;
+		font-family: "Work Sans";
 		font-size: 26px;
 		font-weight: 400;
 		line-height: 30px;
@@ -646,8 +651,9 @@ span{
 		border: transparent;
 		float: right;
 	}
+
 	
-	img {
+	.trash-absolute .img{
 	
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -740,8 +746,17 @@ span{
 		padding-left: 25px;
 	}
 	#back_galery {
-		display: flex;
-		flex-wrap: wrap;
+		/* display: flex;
+		flex-wrap: wrap; */
+
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+		/* grid-column-gap: 1115px; */
+		padding-left: 25px;
+		padding-top: 25px;
+		padding-bottom: 25px;
+		row-gap: 25px;
+	
 	}
 	.galery-item{
 		position: relative;
@@ -754,15 +769,17 @@ span{
 		width: 100%;
 		display: block;
 		padding: 0;
+		
 	}
 	
 	
 	.galery-item a {
 		position: absolute;
-		right: 0;
-		top: 0;
+		right: 5px;
+		top: 5px;
 		text-decoration: none;
 		color: black;
+		background-color: white;
 	} 
 
 

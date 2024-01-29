@@ -51,13 +51,6 @@ if (isAuthenticated()) {
   nouveauButton.textContent = "modifier";
   const img = document.createElement("img");
   img.src = "assets/images/Vector (8).png";
-
-
-
-
-
-
-
   img.className = "logo-Modifier";
   img.setAttribute("alt", "bouton modifier");
   nouveauButton.appendChild(img);
@@ -142,6 +135,23 @@ trashAll.forEach((trash) => {
 deletPhotos();
 
 
+// AJOUTER DES PHOTOS AU MODALE EN CLIQUANT SUR LE BOUTON AJOUTER
 
+const ajoutPhotoModale =document.querySelector(".fermetureModale input");
+ajoutPhotoModale.addEventListener("click",() =>{
+
+// let nouvelleImage =document.createElement("")
+ 
+  // var imageInput = document.getElementById('imageInput');
+  
+  
+  // var selectedFile = imageInput.files[0];
+
+}   )
+  
+    
+  
+  
+    
 
 
