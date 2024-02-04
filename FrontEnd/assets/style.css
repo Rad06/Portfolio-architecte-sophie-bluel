@@ -502,6 +502,21 @@ button.selected {
 	transform: scale(0.99);
 }
 
+
+#contact input:active,
+#contact input:hover,
+#contact input.selected {
+	background-color: #1D6154;
+	color: white;
+	transform: scale(0.99);
+}
+
+
+
+
+
+
+
 .categories {
 	justify-content: center;
 	text-align: center;

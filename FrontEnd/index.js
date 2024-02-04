@@ -168,7 +168,110 @@ formAddPhoto.addEventListener('submit', (event) => {
 
 
 
-// document.getElementById('form-add-photo').addEventListener('submit', function(event) {
+
+
+
+document.getElementById('form-add-photo').addEventListener('submit', function(event) {
+  event.preventDefault(); // Empêche l'envoi du formulaire
+
+  // Récupérer les valeurs du formulaire
+ const title = document.getElementById('title').value;
+  const category = document.getElementById('category').value;
+
+  // Vérification simple pour l'exemple
+  if (!title || !category) {
+    alert('Veuillez remplir tous les champs requis.');
+    return; // Arrête la fonction si le formulaire est invalide
+  }
+
+  // Si la validation est réussie, appeler la fonction pour envoyer le formulaire
+  sendForm();
+});
+
+
+
+function sendForm() {
+  var formData = {
+    title: document.getElementById('title').value,
+    category: document.getElementById('category').value
+    // Ajoutez d'autres champs de formulaire au besoin
+  };
+
+  fetch('http://localhost:5678/api/works/', { 
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Succès:', data);
+    alert('Projet ajouté avec succès!');
+    displayAllWorks(); // Mettez à jour la galerie pour inclure le nouveau projet
+  })
+  .catch((error) => {
+    console.error('Erreur:', error);
+    // alert('Une erreur est survenue lors de l'ajout du projet.');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  displayAllWorks(); // Assurez-vous que cette fonction récupère les projets depuis votre API
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// document.getElementById('formAddPhoto').addEventListener('submit', function(event) {
 //   event.preventDefault();
 
 //   const title = document.getElementById('title').value;
