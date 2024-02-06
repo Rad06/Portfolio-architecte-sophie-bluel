@@ -622,6 +622,10 @@ figcaption {
 
 }
 
-.ajouter-photo .ajout-projet input {
+#input-file {
 	display: none;
+}
+
+#image-preview {
+	width: 50%;
 }

@@ -7,7 +7,9 @@ const formAddLink = document.getElementById("add-photo-link");
 const modaleTitle = document.querySelector(".fermetureModale .modale-title");
 const modaleBack = document.getElementById("modale_back");
 const formAddPhoto = document.getElementById('form-add-photo');
-
+const addFile = document.getElementById('add-file');
+const inputFile = document.getElementById('input-file');
+const imagePreview = document.getElementById('image-preview');
 
 
 
@@ -171,12 +173,20 @@ formAddPhoto.addEventListener('submit', (event) => {
 
 
 
+
 document.getElementById('form-add-photo').addEventListener('submit', function(event) {
   event.preventDefault(); // Empêche l'envoi du formulaire
 
   // Récupérer les valeurs du formulaire
  const title = document.getElementById('title').value;
-  const category = document.getElementById('category').value;
+ const category = document.getElementById('category').value;
+ 
+
+ console.log('title', title, 'categorie', category)
+ if(inputFile.files.length === 0) {
+  alert('veuillez uploader une image');
+  return;
+ }
 
   // Vérification simple pour l'exemple
   if (!title || !category) {
@@ -191,27 +201,31 @@ document.getElementById('form-add-photo').addEventListener('submit', function(ev
 
 
 function sendForm() {
-  var formData = {
-    title: document.getElementById('title').value,
-    category: document.getElementById('category').value
-    // Ajoutez d'autres champs de formulaire au besoin
-  };
-
+ 
+  const file = inputFile.files[0];
+  const formData = new FormData();
+  formData.append('image', file);
+  formData.append('categoryId', document.getElementById('category').value)
+  formData.append('title', document.getElementById('title').value)
   fetch('http://localhost:5678/api/works/', { 
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      Authorization: "Bearer " + getToken(),
     },
-    body: JSON.stringify(formData),
+    body: formData,
   })
   .then(response => response.json())
   .then(data => {
-    console.log('Succès:', data);
-    alert('Projet ajouté avec succès!');
-    displayAllWorks(); // Mettez à jour la galerie pour inclure le nouveau projet
+    if (data.error) {
+      alert("une erreur s est produite: " + data.error.toString())
+    } else {
+      console.log('Succès:', data);
+      alert('Projet ajouté avec succès!');
+      displayAllWorks(); // Mettez à jour la galerie pour inclure le nouveau projet
+    }
   })
   .catch((error) => {
-    console.error('Erreur:', error);
+    console.error('Erreur:', error.toString());
     // alert('Une erreur est survenue lors de l'ajout du projet.');
   });
 }
@@ -223,10 +237,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+addFile.addEventListener('click', function(e) {
+  e.preventDefault();
+  inputFile.click();
+})
 
 
+function handleFiles(files) {
+  
+    const file = files[0];
 
+    if (!file.type.startsWith("image/")) {
+      return ;
+    }
 
+    
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      imagePreview.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  
+}
+
+inputFile.addEventListener(
+  "change",
+  () => {
+    console.log('input file: ', inputFile.files)
+    handleFiles(inputFile.files);
+  },
+  false,
+);
 
 
 

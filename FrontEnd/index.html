@@ -26,9 +26,10 @@
 			<section id="contact" class="mise-en-page-modale">
 				<form method="dialog" id="form-add-photo">
 					<div class="ajouter-photo">
-						<img src="./assets/images/photo.png" alt="photo-ajouter" />
-						<button class="ajout-projet">+ Ajouter photo<input type="file" value="+ Ajouter photo" />
+						<img src="./assets/images/photo.png" alt="photo-ajouter" id="image-preview"  accept="image/*"/>
+						<button class="ajout-projet" id="add-file">+ Ajouter photo
 						</button>
+						<input type="file" value="+ Ajouter photo" id="input-file" />
 						<p>jpg, png : 4mo max</p>
 					</div>
 					<label for="titre">titre</label>
@@ -43,24 +44,7 @@
 					</div>
 				</form>
 			</section>
-			<section id="contact" class="mise-en-page-modale">
-				<form method="dialog" id="form-add-photo">
-	
-					<div class="ajouter-photo">
-						<img src="./assets/images/finn-QhjgAniliuY-unsplash 1.png" alt="photo-bar" />
-					</div>
-					<label for="titre">titre</label>
-					<input type="text" id="title" name="title" placeholder="" required />
-					<label for="categorie">categorie</label>
-					<input type="text" id="category" name="category" placeholder="" required />
-					<div class="trait-gris">
-						<div class="trait"></div>
-					</div>
-					<div class="button-ajouter">
-						<input type="submit" value="valider" />
-					</div>
-				</form>
-			</section>
+			
 		</div>
 		<div class="trait"></div>
 		<form id="add-photo-link">
