@@ -19,7 +19,6 @@ function displayCategories(categories) {
         createCategoryButton(category)
     }
 
-
 }
 function createAllButton() {
     const button = document.createElement('button')
