@@ -19,8 +19,6 @@ loadCategories().then((categories) => {
 });
 displayAllWorks();
 
-
-
 function getValue() {
   // //  // Sélectionner l'élément input et récupérer sa valeur
   // let email = document.getElementById("email").value;
@@ -33,7 +31,6 @@ function getValue() {
   });
 }
 
-
 function selectionner() {
   // //  // Sélectionner l'élément input et récupérer sa valeur
   // let password = document.getElementById("password").value;
@@ -43,7 +40,6 @@ function selectionner() {
   password.addEventListener("click", () => {
     console.log("Vous avez cliqué sur le bouton");
   });
-
 }
 
 // Ajouter un message error sur le champ email si ce dernier n'est pas bon
@@ -75,11 +71,6 @@ if (isAuthenticated()) {
         trash.classList.add("fa-solid", "fa-trash-can");
         a.appendChild(trash);
         fermetureModale.appendChild(a);
-
-
-
-
-
 
         // Relier la poubelle à l'ID de l'image
         trash.id = projet.id;
@@ -123,24 +114,20 @@ function deletPhotos() {
       };
       fetch("http://localhost:5678/api/works/" + id, init)
         .then(() => {
-   
-
-         // rafraichir la page d'accueil
-         displayAllWorks();
-         // fermer la modale
-         closeModal();
-       })
-       .catch((error) => {
-         console.error('error DELETE', error.toString())
+          // rafraichir la page d'accueil
+          displayAllWorks();
+          // fermer la modale
+          closeModal();
+        })
+        .catch((error) => {
+          console.error("error DELETE", error.toString());
         });
     });
-
   });
 }
 
 // deletPhotos()
 deletPhotos();
-
 
 // AJOUTER DES PHOTOS AU MODALE EN CLIQUANT SUR LE BOUTON AJOUTER
 formAddLink.addEventListener("submit", (event) => {
@@ -153,15 +140,7 @@ modaleBack.addEventListener("click", (event) => {
   navigate(false);
 });
 
-
-
-
-
-
-
-
 //  récupérer les données du formulaire en js //
-
 
 formAddPhoto.addEventListener("submit", function (event) {
   event.preventDefault(); // Empêche l'envoi du formulaire
@@ -180,77 +159,65 @@ formAddPhoto.addEventListener("submit", function (event) {
     return; // Arrête la fonction si le formulaire est invalide
   }
 
-
   // Si la validation est réussie, appeler la fonction pour envoyer le formulaire
   sendForm();
   return false;
 });
 
-
-  // Si la validation est réussie, appeler la fonction pour envoyer le formulaire
-  sendForm();
-
-
-
-
-  function  sendForm() {
-    const file = inputFile.files[0];
-    const formData = new FormData();
-    formData.append("image", file);
-    formData.append("category", document.getElementById("category").value);
-    formData.append("title", document.getElementById("title").value);
-    //  faire la requête API pour créer le projet en js
-    fetch("http://localhost:5678/api/works/", {
-      method: "POST",
+function sendForm() {
+  const file = inputFile.files[0];
+  const formData = new FormData();
+  formData.append("image", file);
+  formData.append("category", document.getElementById("category").value);
+  formData.append("title", document.getElementById("title").value);
+  //  faire la requête API pour créer le projet en js
+  fetch("http://localhost:5678/api/works/", {
+    method: "POST",
     headers: {
       Authorization: "Bearer " + getToken(),
     },
     body: formData,
   })
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    if (data.error) {
-      alert("une erreur s est produite: " + data.error.toString());
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      if (data.error) {
+        alert("une erreur s est produite: " + data.error.toString());
+        return false;
+      } else {
+        alert("Projet ajouté avec succès!");
+        //remettre la modal sur la page de listing
+        navigate(false);
+        // Mettez à jour la galerie pour inclure le nouveau projet
+        displayAllWorks();
+        // fermer la modale
+        closeModal();
+      }
       return false;
-    } else {
-      alert("Projet ajouté avec succès!");
-      //remettre la modal sur la page de listing
-      navigate(false);
-      // Mettez à jour la galerie pour inclure le nouveau projet
-      displayAllWorks(); 
-      // fermer la modale
-      closeModal()
-    }
-    return false;
-  })
-  .catch((error) => {
-    console.error("Erreur:", error.toString());
-    // alert('Une erreur est survenue lors de l'ajout du projet.');
-  });
-return false;
+    })
+    .catch((error) => {
+      console.error("Erreur:", error.toString());
+      // alert('Une erreur est survenue lors de l'ajout du projet.');
+    });
+  return false;
+}
 
 document.addEventListener("DOMContentLoaded", function () {
   displayAllWorks(); // Assurez-vous que cette fonction récupère les projets depuis votre API
 });
-
-
 
 addFile.addEventListener("click", function (e) {
   e.preventDefault();
   inputFile.click();
 });
 
-
 function handleFiles(files) {
-
   const file = files[0];
 
   if (!file.type.startsWith("image/")) {
     return;
   }
-
 
   const reader = new FileReader();
   reader.onload = (e) => {
@@ -266,11 +233,3 @@ inputFile.addEventListener(
   },
   false
 );
-
-
-
-
-
-
-
-
