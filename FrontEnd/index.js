@@ -6,12 +6,10 @@ const galerie_add = document.getElementById("back_add");
 const formAddLink = document.getElementById("add-photo-link");
 const modaleTitle = document.querySelector(".fermetureModale .modale-title");
 const modaleBack = document.getElementById("modale_back");
-const formAddPhoto = document.getElementById('form-add-photo');
-const addFile = document.getElementById('add-file');
-const inputFile = document.getElementById('input-file');
-const imagePreview = document.getElementById('image-preview');
-
-
+const formAddPhoto = document.getElementById("form-add-photo");
+const addFile = document.getElementById("add-file");
+const inputFile = document.getElementById("input-file");
+const imagePreview = document.getElementById("image-preview");
 
 // LANCEMENT DE PAGE
 loadCategories().then((categories) => {
@@ -49,9 +47,9 @@ function selectionner() {
 }
 
 // Ajouter un message error sur le champ email si ce dernier n'est pas bon
-function verifierChamp(email) { }
+function verifierChamp(email) {}
 // Ajouter un message error sur le champ password si ce dernier n'est pas bon
-function verifierChamp(password) { }
+function verifierChamp(password) {}
 
 if (isAuthenticated()) {
   let nouveauButton = document.createElement("button");
@@ -120,23 +118,20 @@ function deletPhotos() {
       const init = {
         method: "DELETE",
         headers: {
-          "content-Type": "application/json",
           Authorization: "Bearer " + getToken(),
         },
       };
       fetch("http://localhost:5678/api/works/" + id, init)
-        .then((reponse) => {
-          if (!reponse.ok) {
-            console.log("le delet ne marche pas");
-          }
-          return reponse.json();
-        })
-        .then((data) => {
-          console.log("delet reussi voila la data:", data);
-          // rafraichir la gallerie
+        .then(() => {
+   
 
-          // rafraichir la page d'accueil
-          displayAllWorks()
+         // rafraichir la page d'accueil
+         displayAllWorks();
+         // fermer la modale
+         closeModal();
+       })
+       .catch((error) => {
+         console.error('error DELETE', error.toString())
         });
     });
 
@@ -158,10 +153,6 @@ modaleBack.addEventListener("click", (event) => {
   navigate(false);
 });
 
-formAddPhoto.addEventListener('submit', (event) => {
-  event.preventDefault()
-  console.log('recupérer les données du formulaire et envoie à l api pour créer le nouveau projet')
-})
 
 
 
@@ -171,100 +162,110 @@ formAddPhoto.addEventListener('submit', (event) => {
 
 //  récupérer les données du formulaire en js //
 
-document.getElementById('form-add-photo').addEventListener('submit', function(event) {
+
+formAddPhoto.addEventListener("submit", function (event) {
   event.preventDefault(); // Empêche l'envoi du formulaire
 
   // Récupérer les valeurs du formulaire
- const title = document.getElementById('title').value;
- const category = document.getElementById('category').value;
- console.log('title', title, 'categorie', category)
- if(inputFile.files.length === 0) {
-  alert('veuillez uploader une image');
-  return;
- }
+  const title = document.getElementById("title").value;
+  const category = document.getElementById("category").value;
+  if (inputFile.files.length === 0) {
+    alert("veuillez uploader une image");
+    return;
+  }
 
   // Vérification simple pour l'exemple
   if (!title || !category) {
-    alert('Veuillez remplir tous les champs requis.');
+    alert("Veuillez remplir tous les champs requis.");
     return; // Arrête la fonction si le formulaire est invalide
   }
 
+
   // Si la validation est réussie, appeler la fonction pour envoyer le formulaire
   sendForm();
+  return false;
 });
 
 
+  // Si la validation est réussie, appeler la fonction pour envoyer le formulaire
+  sendForm();
 
-function sendForm() {
-  const file = inputFile.files[0];
-  const formData = new FormData();
-  formData.append('image', file);
-  formData.append('categoryId', document.getElementById('category').value)
-  formData.append('title', document.getElementById('title').value)
-  //  faire la requête API pour créer le projet en js
-  fetch('http://localhost:5678/api/works/', { 
-    method: 'POST',
+
+
+
+  function  sendForm() {
+    const file = inputFile.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("category", document.getElementById("category").value);
+    formData.append("title", document.getElementById("title").value);
+    //  faire la requête API pour créer le projet en js
+    fetch("http://localhost:5678/api/works/", {
+      method: "POST",
     headers: {
       Authorization: "Bearer " + getToken(),
     },
     body: formData,
   })
-  .then(response => response.json())
-  .then(data => {
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
     if (data.error) {
-      alert("une erreur s est produite: " + data.error.toString())
+      alert("une erreur s est produite: " + data.error.toString());
+      return false;
     } else {
-      console.log('Succès:', data);
-      alert('Projet ajouté avec succès!');
-      displayAllWorks(); // Mettez à jour la galerie pour inclure le nouveau projet
+      alert("Projet ajouté avec succès!");
+      //remettre la modal sur la page de listing
+      navigate(false);
+      // Mettez à jour la galerie pour inclure le nouveau projet
+      displayAllWorks(); 
+      // fermer la modale
+      closeModal()
     }
+    return false;
   })
   .catch((error) => {
-    console.error('Erreur:', error.toString());
+    console.error("Erreur:", error.toString());
     // alert('Une erreur est survenue lors de l'ajout du projet.');
   });
-}
+return false;
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   displayAllWorks(); // Assurez-vous que cette fonction récupère les projets depuis votre API
 });
 
 
 
-
-addFile.addEventListener('click', function(e) {
+addFile.addEventListener("click", function (e) {
   e.preventDefault();
   inputFile.click();
-})
+});
 
 
 function handleFiles(files) {
 
-    const file = files[0];
+  const file = files[0];
 
-    if (!file.type.startsWith("image/")) {
-      return ;
-    }
+  if (!file.type.startsWith("image/")) {
+    return;
+  }
 
 
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      imagePreview.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    imagePreview.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
 }
 
 inputFile.addEventListener(
   "change",
   () => {
-    console.log('input file: ', inputFile.files)
     handleFiles(inputFile.files);
   },
-  false,
+  false
 );
-
 
 
 
