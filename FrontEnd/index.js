@@ -123,15 +123,13 @@ function deletPhotos() {
       };
       fetch("http://localhost:5678/api/works/" + id, init)
         .then(() => {
-   
-
-         // rafraichir la page d'accueil
-         displayAllWorks();
-         // fermer la modale
-         closeModal();
-       })
-       .catch((error) => {
-         console.error('error DELETE', error.toString())
+     // rafraichir la page d'accueil
+     displayAllWorks();
+     // fermer la modale
+     closeModal();
+   })
+   .catch((error) => {
+     console.error("error DELETE", error.toString());
         });
     });
 
@@ -193,7 +191,7 @@ formAddPhoto.addEventListener("submit", function (event) {
 
 
 
-  function  sendForm() {
+  function sendForm() {
     const file = inputFile.files[0];
     const formData = new FormData();
     formData.append("image", file);
@@ -219,22 +217,23 @@ formAddPhoto.addEventListener("submit", function (event) {
       //remettre la modal sur la page de listing
       navigate(false);
       // Mettez à jour la galerie pour inclure le nouveau projet
-      displayAllWorks(); 
+      displayAllWorks();
       // fermer la modale
-      closeModal()
+      closeModal();
     }
-    return false;
-  })
-  .catch((error) => {
-    console.error("Erreur:", error.toString());
-    // alert('Une erreur est survenue lors de l'ajout du projet.');
-  });
-return false;
+      return false;
+    })
+    .catch((error) => {
+      console.error("Erreur:", error.toString());
+      // alert('Une erreur est survenue lors de l'ajout du projet.');
+    });
+  return false;
+}
 
 document.addEventListener("DOMContentLoaded", function () {
   displayAllWorks(); // Assurez-vous que cette fonction récupère les projets depuis votre API
 });
-
+   
 
 
 addFile.addEventListener("click", function (e) {
