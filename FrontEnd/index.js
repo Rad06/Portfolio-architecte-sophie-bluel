@@ -137,7 +137,7 @@ function deletPhotos() {
 }
 
 // deletPhotos()
-deletPhotos();
+// deletPhotos();
 
 
 // AJOUTER DES PHOTOS AU MODALE EN CLIQUANT SUR LE BOUTON AJOUTER
@@ -186,7 +186,7 @@ formAddPhoto.addEventListener("submit", function (event) {
 
 
   // Si la validation est réussie, appeler la fonction pour envoyer le formulaire
-  sendForm();
+  // sendForm();
 
 
 
