@@ -21,7 +21,7 @@ function navigate(ajoutPhoto = true) {
         modaleTitle.textContent = 'Ajout photo';
         modaleBack.style.display = 'inline';
     } else {
-        galerie.style.display = 'grid';
+        galerie.style.display = 'flex';
         galerie_add.style.display = 'none';
         formAddLink.style.display = 'block';
         modaleTitle.textContent = 'Galerie photo';
