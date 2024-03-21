@@ -18,7 +18,7 @@ loadCategories().then((categories) => {
   displayCategories(categories); //Transmet categories au displayCategories
 });
 displayAllWorks();
-
+74
 
 
 function getValue() {

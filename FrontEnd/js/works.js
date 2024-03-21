@@ -31,7 +31,7 @@ function createWork(work) {
     img.alt = work.title
     const figcaption = document.createElement("figcaption")
     figcaption.textContent = work.title
-    // Ajoute 2 elemnts au partent
+    // Ajoute 2 elemnts aux parents
     figure.appendChild(img)
     figure.appendChild(figcaption)
     images.appendChild(figure) // rajout en dernier pour empecher les sursauts graphiques
