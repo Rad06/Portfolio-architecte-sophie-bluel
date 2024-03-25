@@ -11,14 +11,14 @@ const addFile = document.getElementById("add-file");
 const inputFile = document.getElementById("input-file");
 const imagePreview = document.getElementById("image-preview");
 
-// LANCEMENT DE PAGE
-loadCategories().then((categories) => {
-  createCategoriesContainer();
-  // Une fois les travaux recuperes on appel nos fonctions
-  displayCategories(categories); //Transmet categories au displayCategories
-});
+// // LANCEMENT DE PAGE
+// loadCategories().then((categories) => {
+//   createCategoriesContainer();
+//   // Une fois les travaux recuperes on appel nos fonctions
+//   displayCategories(categories); //Transmet categories au displayCategories
+// });
 displayAllWorks();
-74
+
 
 
 function getValue() {
@@ -52,6 +52,19 @@ function verifierChamp(email) {}
 function verifierChamp(password) {}
 
 if (isAuthenticated()) {
+
+  // bar
+  const bar = document.getElementById('bar');
+  bar.style.display = 'block';
+  const disconnectElement = document.getElementById('disconnect_link');
+  disconnect_link.addEventListener('click', function() {
+  
+});
+
+
+
+
+  disconnectElement.style.display = 'list-item'
   let nouveauButton = document.createElement("button");
   const h2 = document.querySelector("#portfolio h2");
   nouveauButton.textContent = "modifier";
@@ -93,7 +106,14 @@ if (isAuthenticated()) {
       deletPhotos();
     });
   });
-}
+} else {
+  // LANCEMENT DE PAGE
+loadCategories().then((categories) => {
+  createCategoriesContainer();
+  // Une fois les travaux recuperes on appel nos fonctions
+  displayCategories(categories); //Transmet categories au displayCategories
+});
+ }
 
 // Fermer la fenetre modale au click sur le bouton
 const closeModalGaleryButton = document.getElementById("close_back_galery");

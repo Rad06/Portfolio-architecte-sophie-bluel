@@ -274,12 +274,12 @@ li:hover {
 }
 
 input[type="submit"] {
-	font-family: 'Syne';
-	font-weight: 700;
+	/* font-family: 'Syne';
+	font-weight: 700; */
 	color: white;
 	background-color: #1D6154;
 	margin: 2em auto;
-	width: 8em;
+	/* width: 8em; */
 	text-align: center;
 	border-radius: 60px;
 
@@ -295,18 +295,18 @@ footer nav ul {
 
 /* MODALE AJOUT PHOTO */
 .mise-en-page-modale .ajouter-photo {
-	
+
 	background: #E8F1F6;
-	
-	
+
+
 	top: 660px;
 	left: 405px;
 	gap: 0px;
 	border-radius: 10px 0px 0px 0px;
 	opacity: 0px;
-	
+
 	margin-left: 25%;
-	
+
 
 
 
@@ -408,9 +408,9 @@ footer nav ul {
 
 .fermetureModale {
 
-	width: 50%;
-	height: 700px;
-	top: 20%;
+	width: 75%;
+
+	top: 12.5%;
 	left: 12.5%;
 	border-radius: 10px;
 	overflow-y: scroll;
@@ -439,14 +439,24 @@ input {
 	justify-content: center;
 	text-align: center;
 	align-items: center;
-	height: 50px;
-	font-size: 3em;
+	height: 30px;
+	width: 16.7em;
+	/* font-size: 25px; */
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-	margin-left: 25%;
+	/* margin-left: 25%; */
 
 
 }
+
+.fermetureModale .buton-input {
+	height: 50px;
+	width: 16.7em;
+	font-size: 25px;
+	margin-left: 25%;
+	margin-bottom: 25px;
+}
+
 
 /* .centrer #category {
 	height: 50px;
@@ -456,25 +466,29 @@ input {
 } */
 input.valider {
 	background-color: #A7A7A7;
-	margin-left: 35%;
+	margin-left: 10em;
 	font-size: 2em;
-width: 10em;
-   }
-select#category{
+	width: 10em;
+}
+
+select#category {
 	display: flex;
 	justify-content: center;
 	text-align: center;
 	align-items: center;
 	height: 50px;
-	font-size: 3em;
+	width: 30em;
+	font-size: 1em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	margin-left: 25%;
-	
+
 }
-.centrer label{
+
+.centrer label {
 
 	margin-left: 25%;
+
 }
 
 .fermetureModale p {
@@ -607,22 +621,22 @@ figcaption {
 }
 
 #back_galery {
-	/* display: flex;
-		flex-wrap: wrap; */
+	display: flex;
+	flex-wrap: wrap;
 
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	/* display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
 	/* grid-column-gap: 1115px; */
 	padding-left: 25px;
 	padding-top: 25px;
 	padding-bottom: 25px;
-	row-gap: 25px;
+	/* row-gap: 25px; */
 
 }
 
 .galery-item {
 	position: relative;
-	width: 100px;
+	width: 78px;
 	margin-left: 10px;
 	margin-bottom: 10px;
 }
@@ -689,3 +703,22 @@ font-size: 1.2em;
 border: none;
 box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 } */
+
+.bar-white {
+	color: white;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+	/* padding-top: 15px; */
+
+}
+
+.logo-Modifier-white {
+	margin: auto;
+	background-color: red;
+	margin-left: 35%;
+
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+}
