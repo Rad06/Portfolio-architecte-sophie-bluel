@@ -15,7 +15,9 @@
 </head>
 
 <body>
-	<div id="bar" style="background-color: pink;display: none; height: 45px; width: auto;"> <img class="logo-Modifier-white" src="./assets/images/Vector (8).png" alt="logo-Modifier"> <p class="bar-white" >Mode édition</p>  </div>
+	<div id="bar"> 
+		<p class="bar-white"><img class="logo-Modifier-white" src="./assets/icons/modifier.png" alt="logo-Modifier" />Mode édition</p> 
+	</div>
 	<div class="modaleGrey"></div>
 	<dialog class="fermetureModale">
 		<a href="#" id="modale_back"><img class="idd" src="./assets/images/Vector.png" alt="flèche" /></a>
@@ -34,16 +36,16 @@
 						<p>jpg, png : 4mo max</p>
 					</div>
 					<div class="centrer">
-					<label class="titre" for="title">Titre</label>
-					<input class="buton-input" type="text" id="title" name="title" placeholder="" required />
-					<label class="titre" for="category">Categorie</label>
+						<label class="titre" for="title">Titre</label>
+						<input class="buton-input" type="text" id="title" name="title" placeholder="" required />
+						<label class="titre" for="category">Categorie</label>
+						<select name="category" id="category">
+							<option value="0">--Choisir une catégorie--</option>
+							<option value="1">Objets</option>
+							<option value="2">Appartements</option>
+							<option value="3">Hotels & restaurants</option>
+						</select>
 				</div>
-					<select name="category" id="category">
-						<option value="0">--Choisir une catégorie--</option>
-						<option value="1">Objets</option>
-						<option value="2">Appartements</option>
-						<option value="3">Hotels & restaurants</option>
-					</select>
 					<input class="valider"  type="submit" value="Valider" />
 				</form>
 			</section>
@@ -60,7 +62,7 @@
 			<ul>
 				<li><a href="#portfolio">projets</a></li>
 				<li><a href="#contact">contact</a></li>
-				<li id="disconnect_link" style="display: none;"><a>deconnexion</a></li>
+				<li id="disconnect_link" style="display: none;"><a href="#">déconnexion</a></li>
 				<li id="login_link"><a href="./login.html">login</a></li>
 				<li class="insta">
 					<img src="./assets/icons/instagram.png" alt="Instagram" />

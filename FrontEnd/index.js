@@ -56,15 +56,18 @@ if (isAuthenticated()) {
   // bar
   const bar = document.getElementById('bar');
   bar.style.display = 'block';
-  const disconnectElement = document.getElementById('disconnect_link');
-  disconnect_link.addEventListener('click', function() {
-  
+  const disconnectElementWrapper = document.querySelector('#disconnect_link')
+  disconnectElementWrapper.style.display = 'list-item';
+  const disconnectElement = disconnectElementWrapper.querySelector('a');
+  disconnectElement.addEventListener('click', function(e) {
+    e.preventDefault();
+    localStorage.removeItem('token');
+    window.location.reload();
 });
 
 
 
 
-  disconnectElement.style.display = 'list-item'
   let nouveauButton = document.createElement("button");
   const h2 = document.querySelector("#portfolio h2");
   nouveauButton.textContent = "modifier";
